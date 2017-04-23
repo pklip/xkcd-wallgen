@@ -130,7 +130,7 @@ def composeWallpaper(url, width, height, outfile):
     layout_url.set_text(img_title + "\n" + res_url)
     context.set_source_rgb(0, 0, 0)
     pangocairo_context.update_layout(layout_url)
-    context.move_to(10, 10)
+    context.move_to(40, 40)
     layout_url.context_changed()
     pangocairo_context.show_layout(layout_url)
 
