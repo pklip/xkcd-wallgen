@@ -30,7 +30,9 @@ The example wallpaper in the folder examples was generated with
 ```bash
 ./xkcd-wallgen.py -n 1597 -d 1600 900 -o examples
 ```
-
+<kbd>
+  <img src="https://github.com/pklip/xkcd-wallgen/raw/master/examples/xkcd1597_1600x900.png">
+</kbd>
 
 Known-issues
 ------------
