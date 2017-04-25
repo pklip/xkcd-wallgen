@@ -3,7 +3,7 @@ xkcd-wallgen
 
 Generate xkcd wallpapers using python with cairo and pango
 
-This is an initial python scripting approach to generate nice wallpapers from [xkcd](www.xkcd.com) (All credits to Randall Munroe).
+This is an initial python scripting approach to generate nice wallpapers from [xkcd](http://www.xkcd.com) (All credits to Randall Munroe).
 It is intended to be used on linux and uses cairo for drawing the comics and pango for typesetting all the text (including the mouse over tooltips) using the matching [xkcd font](https://github.com/ipython/xkcd-font) which needs to be installed to the system.
 
 Usage
