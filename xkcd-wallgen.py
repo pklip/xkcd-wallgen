@@ -89,7 +89,7 @@ def composeWallpaper(url, width, height, outfile):
     w = 420 if len(img_text) < 70 else (50 + int(math.sqrt(len(img_text))) * 40)
     #print w
 
-    layout.set_width(w * pango.SCALE)
+    layout.set_width(int(round(w * pango.SCALE)))
     layout.set_wrap(pango.WRAP_WORD)
     font = pango.FontDescription("xkcd 15")
     layout.set_font_description(font)
@@ -118,7 +118,7 @@ def composeWallpaper(url, width, height, outfile):
         # text right of image
         free_space_right = width - img_east
         if free_space_right < text_width + 2 * margin:
-            layout.set_width((free_space_right - 2 * margin) * pango.SCALE)
+            layout.set_width(int(round((free_space_right - 2 * margin) * pango.SCALE)))
             text_width, text_height = layout.get_pixel_size()
         text_xpos = img_east + margin
         text_ypos = img_south - text_height
@@ -152,7 +152,7 @@ if __name__ == "__main__":
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-n", "--numbers", dest="numbers",
                         help="numbers of xkcd comics to compose", nargs="+")
-    group.add_argument("-r", "--random", dest="random", default=True, help="use random xkcd comic")
+    group.add_argument("-r", "--random", dest="random", action="store_true", default=True, help="use random xkcd comic")
     parser.add_argument("-d", "--dimensions", dest="dims",
                         help="dimensions in order x y", nargs=2, required=True)
     parser.add_argument("-o", "--output_path", dest="out_path",
