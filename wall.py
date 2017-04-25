@@ -13,6 +13,8 @@ import cairo
 import pango
 import pangocairo
 
+import tempfile
+
 
 def resolveUrl(url):
     req = urllib2.Request(url)
@@ -33,9 +35,13 @@ def getXkcdImageUrl(url):
 
 
 def composeWallpaper(url, width, height, outfile):
+    # create tempfile for intermediate image
+    tmp_file = tempfile.NamedTemporaryFile()
+
+    # resolve url
     res_url = resolveUrl(url)
     img_url, img_title, img_text = getXkcdImageUrl(res_url)
-    urllib.urlretrieve("http://" + img_url, "pic.png")
+    urllib.urlretrieve("http://" + img_url, tmp_file.name)
 
     #print res_url
 
@@ -48,7 +54,7 @@ def composeWallpaper(url, width, height, outfile):
     context.fill()
 
     # draw picture
-    pic_surf = cairo.ImageSurface.create_from_png("pic.png")
+    pic_surf = cairo.ImageSurface.create_from_png(tmp_file.name)
     pic_width = pic_surf.get_width()
     pic_height = pic_surf.get_height()
     margin = 20
@@ -79,6 +85,7 @@ def composeWallpaper(url, width, height, outfile):
 
     layout = pangocairo_context.create_layout()
 
+    # width of the text field (i know it's hacky but it looks good 99% of the time...)
     w = 420 if len(img_text) < 70 else (50 + int(math.sqrt(len(img_text))) * 40)
     #print w
 
