@@ -43,8 +43,6 @@ def composeWallpaper(url, width, height, outfile):
     img_url, img_title, img_text = getXkcdImageUrl(res_url)
     urllib.urlretrieve("http://" + img_url, tmp_file.name)
 
-    #print res_url
-
     surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
     context = cairo.Context(surf)
 
@@ -70,15 +68,6 @@ def composeWallpaper(url, width, height, outfile):
     context.set_source_surface(pic_surf)
     context.paint()
     context.restore()
-
-    # draw text
-    # get font families:
-    # font_map = pangocairo.cairo_font_map_get_default()
-    # families = font_map.list_families()
-
-    # to see family names:
-    # print [f.get_name() for f in   font_map.list_families()]
-
 
     pangocairo_context = pangocairo.CairoContext(context)
     pangocairo_context.set_antialias(cairo.ANTIALIAS_SUBPIXEL)
@@ -148,7 +137,8 @@ def composeWallpaper(url, width, height, outfile):
 if __name__ == "__main__":
     # img_url, img_text = getXkcdImageUrl("http://www.xkcd.com/482/");
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="This generates wallpapers using the comic number(s) from xkcd (or random) for the specified image dimension and saves them to the output directory")
+
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-n", "--numbers", dest="numbers",
                         help="numbers of xkcd comics to compose", nargs="+")
