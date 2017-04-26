@@ -24,8 +24,9 @@ def resolveUrl(url):
 
 
 def getXkcdImageUrl(url):
-    response = urllib.urlopen(url)
-    html = response.read()
+    req = urllib2.Request(url)
+    res = urllib2.urlopen(req)
+    html = res.read()
     soup = BeautifulSoup(html, "html.parser")
     comic_div = soup.find_all(id="comic")
     img_url = comic_div[0].img["src"].strip("/")
